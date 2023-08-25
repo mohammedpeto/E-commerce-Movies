@@ -1,0 +1,135 @@
+﻿@model Movie
+
+@{
+    ViewData["Title"] = "Details of Movie";
+}
+
+
+<div class="row">
+
+    <div class="col-md-4 col-xs-6 border-primary mb-3">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Name
+
+                                <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="~/img/@Model.ImageURL" width="100%" alt="@Model.Name">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <p class="card-text">@Model.Description</p>
+                        <p class="card-text"><b>Cinema: </b>@Model.Cinema.Name</p>
+                        <p class="card-text"><b>Category: </b>@Model.MovieCatagory</p>
+                        <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("dd MMM yy")</p>
+                        <p class="card-text"><b>End Date: </b>@Model.EndDate.ToString("dd MMM yy")</p>
+                        <p class="card-text ">
+                            <b>Status: </b>
+                            @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
+                            {
+                                <span class="badge bg-success text-white">Available</span>
+                            }
+                            else if (DateTime.Now > Model.EndDate)
+                            {
+                                <span class="badge bg-danger text-white">Expired</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-primary text-white">UpComing</span>
+                            }
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-4 col-xs-6 border-primary mb-3">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-secondary">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Producer.FullName
+
+                                <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="~/img/@Model.Producer.ProfilePictureURL" width="100%" alt="@Model.Producer.FullName">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <p class="card-text">@Model.Producer.Bio</p>
+                        <p class="card-text"><b>Producer: </b>@Model.Producer.FullName</p>
+                        <p class="card-text"><b>Category: </b>@Model.MovieCatagory</p>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-4 col-xs-6 border-primary mb-3">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-success">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Cinema.Name
+
+                                <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="~/img/@Model.Cinema.Logo" width="100%" alt="@Model.Cinema.Name">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <p class="card-text">@Model.Cinema.Description</p>
+                        <p class="card-text"><b>Cinema: </b>@Model.Cinema.Name</p>
+                        <p class="card-text"><b>Category: </b>@Model.MovieCatagory</p>
+                        <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("dd MMM yy")</p>
+                        <p class="card-text"><b>End Date: </b>@Model.EndDate.ToString("dd MMM yy")</p>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div>
+
+    <a asp-action="Index" class="btn btn-outline-primary">Show All</a>
+
+</div>

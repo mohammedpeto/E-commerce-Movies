@@ -1,4 +1,5 @@
 ﻿using eTickets.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eTickets.Data
 {
-    public class TicketDbContext : DbContext
+    public class TicketDbContext : IdentityDbContext
     {
         public TicketDbContext(DbContextOptions<TicketDbContext> options) :base(options)
         {

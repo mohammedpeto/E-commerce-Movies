@@ -1,4 +1,5 @@
 ﻿using eTickets.Data;
+using eTickets.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,18 +11,25 @@ namespace eTickets.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly TicketDbContext context;
+      
 
-        public MovieController(TicketDbContext _context)
+        public MovieController(IMovieService _movieRepo)
         {
-            context = _context;
+            MovieRepo = _movieRepo;
         }
 
+        public IMovieService MovieRepo { get; }
 
         public IActionResult Index()
         {
-            var mo = context.Movies.Include(n=>n.Cinema).ToList();
+            var mo = MovieRepo.GetAll();
             return View(mo);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var mov = MovieRepo.GetByID(id);
+            return View(mov);
         }
     }
 }

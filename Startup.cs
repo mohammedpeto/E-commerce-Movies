@@ -32,6 +32,7 @@ namespace eTickets
             services.AddScoped<IActorsService, ActorsServices>();
             services.AddScoped<ICinemaService, CinemaServices>();
             services.AddScoped<IProducerService, ProducerService>();
+            services.AddScoped<IMovieService, MovieService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
