@@ -1,0 +1,39 @@
+﻿@model List<Producer>
+
+@{
+    ViewData["Title"] = "List Of Producers";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table">
+            <tr class="text-center">
+                <th>Profile Picture</th>
+                <th>Full Name</th>
+                <th>Bio</th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="align-middle"><img src="@item.ProfilePictureURL" class="rounded-circle" alt="@item.FullName" style="width:150px;height:150px" /></td>
+                    <td class="align-middle">@item.FullName</td>
+                    <td class="align-middle">@item.Bio</td>
+                    <td>
+                        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.ID"><i class="bi bi-pencil-square"></i>Edit</a> |
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.ID"><i class="bi bi-eye"></i>Details</a> |
+                        <a class="btn btn-outline-danger text-black-50" asp-action="Delete" asp-route-id="@item.ID"><i class="bi bi-trash"></i>Delete</a>
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+</div>
+
+
+<div>
+    <a class="btn btn-primary" asp-action="Create">Add New</a>
+</div>
