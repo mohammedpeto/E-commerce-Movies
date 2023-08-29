@@ -33,12 +33,26 @@
                             <a class="nav-link text-dark" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i>  Actors</a>
                         </li>
 
-                       
+
                     </ul>
                     <form class="form-inline my-2 my-lg-2" asp-controller="Movie" asp-action="Filter" style="padding-right: 25px;">
                         <input type="text" name="searchString" class="form-control" placeholder="Search for a movie...." />
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
                     </form>
+
+                </div>
+                @if (User.Identity.IsAuthenticated == false)
+                    {
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register"><i class="bi bi-ticket-detailed"></i>Register</a>
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Login"><i class="badge-info bi-login"></i>Login</a>
+                    }
+                else 
+                    {
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout"><i class="badge-info bi-logout"></i>Logout</a> 
+                    }
+
+                    
+                <div>
 
                 </div>
             </div>

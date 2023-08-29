@@ -1,5 +1,6 @@
 ﻿using eTickets.Data;
 using eTickets.Data.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,7 +26,7 @@ namespace eTickets.Controllers
             var mo = MovieRepo.GetAll();
             return View(mo);
         }
-
+        [Authorize]
         public IActionResult Details(int id)
         {
             var mov = MovieRepo.GetByID(id);

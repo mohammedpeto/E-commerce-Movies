@@ -3,6 +3,7 @@ using eTickets.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,8 @@ namespace eTickets
         {
             services.AddDbContext<TicketDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<TicketDbContext>();
+
             services.AddControllersWithViews();
             services.AddScoped<IActorsService, ActorsServices>();
             services.AddScoped<ICinemaService, CinemaServices>();
@@ -52,6 +55,8 @@ namespace eTickets
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
