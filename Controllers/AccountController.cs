@@ -1,4 +1,5 @@
 ﻿using eTickets.Data.ViewModels;
+using eTickets.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,14 +11,14 @@ namespace eTickets.Controllers
 {
     public class AccountController : Controller
     {
-        public AccountController(UserManager<IdentityUser> _userManager , SignInManager<IdentityUser> _signInManager)
+        public AccountController(UserManager<ApplicationUser> _userManager , SignInManager<ApplicationUser> _signInManager)
         {
             UserManager = _userManager;
             SignInManager = _signInManager;
         }
 
-        public UserManager<IdentityUser> UserManager { get; }
-        public SignInManager<IdentityUser> SignInManager { get; }
+        public UserManager<ApplicationUser> UserManager { get; }
+        public SignInManager<ApplicationUser> SignInManager { get; }
 
        
 
@@ -30,10 +31,10 @@ namespace eTickets.Controllers
         {
             if(ModelState.IsValid==true)
             {
-                IdentityUser user = new IdentityUser();
+                var user = new ApplicationUser();
                 user.UserName = reg.UserName;
                 user.Email = reg.Email;
-                IdentityResult result = await UserManager.CreateAsync(user, reg.Password);
+                var result = await UserManager.CreateAsync(user, reg.Password);
                 if(result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, false);
@@ -60,10 +61,10 @@ namespace eTickets.Controllers
         {
             if(ModelState.IsValid == true)
             {
-                IdentityUser user = await UserManager.FindByNameAsync(logg.UserName);
+                ApplicationUser user = await UserManager.FindByNameAsync(logg.UserName);
                 if(user !=null)
                 {
-                    Microsoft.AspNetCore.Identity.SignInResult result = await SignInManager.PasswordSignInAsync(user, logg.Password, false, false);
+                   var result = await SignInManager.PasswordSignInAsync(user, logg.Password, false, false);
                     if(result.Succeeded)
                     {
                         return RedirectToAction("Index", "Movie");

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eTickets.Data
 {
-    public class TicketDbContext : IdentityDbContext
+    public class TicketDbContext : IdentityDbContext<ApplicationUser>
     {
         public TicketDbContext(DbContextOptions<TicketDbContext> options) :base(options)
         {
@@ -37,6 +37,11 @@ namespace eTickets.Data
         public DbSet<Cinema> Cinemas { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Producer> Producers { get; set; }
+
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
 
     }

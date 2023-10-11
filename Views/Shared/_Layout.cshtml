@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+
+
 </head>
 <body>
     <header>
@@ -39,11 +41,12 @@
                         <input type="text" name="searchString" class="form-control" placeholder="Search for a movie...." />
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
                     </form>
+                    <a class="nav-link text-dark" asp-controller="Orders" asp-action="Index">Cart<i class="bi bi-ticket-detailed"></i></a>
 
                 </div>
                 @if (User.Identity.IsAuthenticated == false)
                     {
-                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register"><i class="bi bi-ticket-detailed"></i>Register</a>
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register"><i class="bi"></i>Register</a>
                         <a class="nav-link text-dark" asp-controller="Account" asp-action="Login"><i class="badge-info bi-login"></i>Login</a>
                     }
                 else 

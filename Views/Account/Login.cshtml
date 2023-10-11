@@ -2,37 +2,84 @@
 
 @{
     ViewData["Title"] = "Login";
+
+    Layout = "_AdminLayout";
 }
+@*
+    <h1 class="row justify-content-center">Login</h1>
 
-<h1 class="row justify-content-center">Login</h1>
+    <h4 class="row justify-content-center">Login Your Account</h4>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-4 ">
+            <form asp-action="Login">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
 
-<h4 class="row justify-content-center">Login Your Account</h4>
-<hr />
-<div class="row justify-content-center">
-    <div class="col-md-4 ">
+    <div>
+        <a asp-action="Index" asp-controller="Movie" class="btn btn-outline-primary justify-content-end">Back to Home</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+*@
+
+
+
+
+
+   
+   
+    <link rel="stylesheet" href="~/css/styleLogin.css">
+
+    <div class="wrapper">
+        <div class="title">
+            Login 
+        </div>
         <form asp-action="Login">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
+            <div class="field">
+                <input asp-for="UserName" required>
+                <label>User Name</label>
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+            <div class="field">
+                <input asp-for="Password" required>
+                <label>Password</label>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
+            <div class="content">
+                <div class="checkbox">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <div class="pass-link">
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+            <div class="field">
+                <input type="submit" value="Login">
+            </div>
+            <div class="signup-link">
+                Not a member? <a asp-action="Register"> Signup now </a>
             </div>
         </form>
     </div>
-</div>
-
 <div>
-    <a asp-action="Index"  asp-controller="Movie" class="btn btn-outline-primary justify-content-end">Back to Home</a>
+    <br />
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

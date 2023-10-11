@@ -1,7 +1,11 @@
 using eTickets.Data;
+using eTickets.Data.Cart;
 using eTickets.Data.Services;
+using eTickets.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,13 +33,28 @@ namespace eTickets
         {
             services.AddDbContext<TicketDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<TicketDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<TicketDbContext>();
 
             services.AddControllersWithViews();
             services.AddScoped<IActorsService, ActorsServices>();
             services.AddScoped<ICinemaService, CinemaServices>();
             services.AddScoped<IProducerService, ProducerService>();
             services.AddScoped<IMovieService, MovieService>();
+
+            services.AddScoped<IOrdersService, OrdersService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
+
+            services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +74,7 @@ namespace eTickets
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
 
